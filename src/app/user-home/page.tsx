@@ -23,7 +23,7 @@ export default function UserHome() {
         <p className="font-bold">Sample S. Sample</p>
         <div>
           <a
-            href="#"
+            href="/user-view-profile"
             className="border-2 border-blue-500 text-blue-500 rounded-full px-11 py-2 mt-5 inline-block font semibold hover:bg-blue-500 hover:text-white"
           >
             View Profile
@@ -31,7 +31,7 @@ export default function UserHome() {
         </div>
         <div>
           <a
-            href="#"
+            href="/user-edit-profile"
             className="border-2 border-blue-500 text-blue-500 rounded-full px-12 py-2 mt-2 inline-block font semibold hover:bg-blue-500 hover:text-white"
           >
             Edit Profile
