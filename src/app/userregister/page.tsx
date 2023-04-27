@@ -7,7 +7,7 @@ export default function UserRegister(){
         <main>
             <div className = "mt-4 flex">
                 <button className = "ml-4 font-sans"><Link href = "/">Back</Link></button>
-                <img className = "mb-2 object-none object-right-top" src = "/images/tempB.png" width = {100} height = {100}></img>
+                <img className = "mb-2 ml-auto" src = "/images/tempB.png" width = {100} height = {100}></img>
             </div>
             <div className = "mt-5 mb-6 ml-9 flex">
                 <p className = "mt-2 ml-3">
