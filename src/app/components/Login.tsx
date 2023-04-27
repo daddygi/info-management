@@ -57,7 +57,7 @@ export default function Login() {
           <div className="border-2 w-10 border-white inline-block mb-2"></div>
           <p className="mb-10">Fill up your personal information here.</p>
           <a
-            href="#"
+            href="/userregister"
             className="border-2 border-white rounded-full px-12 py-2 inline-block font semibold hover:bg-white hover:text-blue-600"
           >
             Sign up
