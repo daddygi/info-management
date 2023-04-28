@@ -9,7 +9,7 @@ interface RegisterData {
     middleinitial: string;
     lastname: string;
     suffix?: string;
-    gender: string;
+    gender: "male" | "female";
     age: number;
     birthdate: string;
     civilstatus: string;
@@ -30,7 +30,7 @@ function UserRegister(){
         firstname: "",
         middleinitial: "",
         lastname: "",
-        gender: "",
+        gender: "male",
         age: 0,
         birthdate: "",
         civilstatus: "",
@@ -82,6 +82,7 @@ function UserRegister(){
                     </label>
                     <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="middleinitial" 
+                    name = "middleinitial"
                     type="text"
                     value = {registerData.middleinitial}
                     onChange = {handleChange}></input>
@@ -92,6 +93,7 @@ function UserRegister(){
                     </label>
                     <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="lastname" 
+                    name = "lastname"
                     type="text"
                     value = {registerData.lastname}
                     onChange = {handleChange}></input>
@@ -102,6 +104,7 @@ function UserRegister(){
                     </label>
                     <input className = "shadow appearance-none border rounded py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="suffix" 
+                    name = "suffix"
                     type="text"
                     value = {registerData.suffix}
                     onChange = {handleChange}></input>
@@ -112,22 +115,24 @@ function UserRegister(){
                 <p className = "mt-5 ml-7 mr-5">
                     <input className = "relative float-left ml-1 mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                     type = "radio"
+                    id = "male"
                     name = "gender"
                     value = "male"
                     checked = {registerData.gender === "male"}
                     onChange = {handleChange}></input>
-                    <label>
+                    <label htmlFor = "male">
                         Male
                     </label>
                 </p>
                 <p className = "mt-5 ml-7 mr-5">
                     <input className = "relative float-left ml-1 mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                     type = "radio"
+                    id = "female"
                     name = "gender"
                     value = "female"
                     checked = {registerData.gender === "female"}
                     onChange = {handleChange}></input>
-                    <label>
+                    <label htmlFor = "female">
                         Female
                     </label>
                 </p>
@@ -156,7 +161,7 @@ function UserRegister(){
             <div className = "mt-10 mb-6 ml-9 flex">
                 <p className = "mr-20 ml-4">
                     <label>Birthdate: </label>
-                    <input type = "date" id = "birthday" name = "birthday" value = {registerData.birthdate} onChange={handleChange}>
+                    <input type = "date" id = "birthdate" name = "birthdate" value = {registerData.birthdate} onChange={handleChange}>
                     </input>
                 </p>
                 <p className = "ml-12 flex">Civil Status: </p>
@@ -282,6 +287,7 @@ function UserRegister(){
                     </label>
                     <input className = "shadow appearance-none border rounded py-2 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="occupation" 
+                    name = "occupation"
                     type="text"
                     value = {registerData.occupation}
                     onChange = {handleChange}></input>
@@ -293,6 +299,7 @@ function UserRegister(){
                     </label>
                     <input className = "shadow appearance-none border rounded py-2 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="residentid" 
+                    name = "residentid"
                     type="text"
                     value = {registerData.residentid}
                     onChange = {handleChange}></input>
@@ -306,6 +313,7 @@ function UserRegister(){
                     </label>
                     <input className = "shadow appearance-none border rounded py-2 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="addressline1" 
+                    name = "addressline1"
                     type="text"
                     value = {registerData.addressline1}
                     onChange = {handleChange}></input>
@@ -317,6 +325,7 @@ function UserRegister(){
                     </label>
                     <input className = "shadow appearance-none border rounded py-2 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="addressline2" 
+                    name = "addressline2"
                     type="text"
                     value = {registerData.addressline2}
                     onChange = {handleChange}></input>
