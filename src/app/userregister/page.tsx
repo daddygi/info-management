@@ -19,7 +19,7 @@ interface RegisterData {
     residentid: number;
     addressline1: string;
     addressline2?: string;
-    photo?: null;
+    photo?: File;
     password: string;
 }
 
@@ -42,6 +42,7 @@ function UserRegister(){
         addressline1: "",
         addressline2: "",
         password: "",
+        photo: undefined,
     });
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -50,15 +51,6 @@ function UserRegister(){
         const { name, value } = e.target;
 
         setRegisterData((prevState) => ({ ...prevState, [name]: value}));
-    };
-
-    const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const name = event.target.name;
-        const photo = event.target.files?.[0] || null;
-
-        setRegisterData((prevRegisterData) => ({
-            ...prevRegisterData, [name]: photo,
-        }));
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +63,18 @@ function UserRegister(){
             setErrorMessage('Password must be at least: 8 characters long, 1 uppercase letter, 1 lowercase letter, 1 number');
             return;
         }
-    }
+    };
+
+    const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0]
+        if(file){
+            setRegisterData((prevState) => ({ ...prevState, photo: file}));
+        }
+    };
+
+    const handlePhotoDelete = () => {
+        setRegisterData((prevState) => ({ ...prevState, photo: undefined}));
+    };
 
     return(
         <form onSubmit = {handleSubmit}>
@@ -156,13 +159,22 @@ function UserRegister(){
                     </label>
                 </p>
                 <p className = "mt-5 ml-7 mr-1">Insert Photo: </p>
-                <p className = "mt-2 ml-7 mr-4">
-                    <button className = "inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                        <svg className = "h-full w-full text-gray-300" fill = "currentColor" viewBox = "0 0 24 24">
+                <div className = "mt-2 ml-7 mr-4">
+                    <label htmlFor = "photo" className = "cursor-pointer mr-4">
+                        {registerData.photo ? (
+                            <img src = {URL.createObjectURL(registerData.photo)} alt = "Profile" className = "inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100"/>
+                        ) : (
+                        <svg className = "h-12 w-12 rounded-full text-gray-300" fill = "currentColor" viewBox = "0 0 24 24">
                             <path d = "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
-                    </button>
-                </p>
+                        )}
+                        <input type = "file" id = "photo" className = "hidden" onChange = {handlePhotoUpload}/>
+                    </label>
+                    {registerData.photo && (
+                        <button type = "button" className = "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                        onClick = {handlePhotoDelete}>Delete Photo</button>
+                    )}
+                </div>
 
                 <p className = "mt-2 ml-7 mr-4">
                     <label className = "ml-4 block text-gray-700 text-sm font-bold mb-2">
@@ -331,7 +343,8 @@ function UserRegister(){
                     name = "residentid"
                     type="text"
                     value = {registerData.residentid}
-                    onChange = {handleChange}></input>
+                    onChange = {handleChange}
+                    required></input>
                 </p>
             </div>
 
@@ -345,7 +358,8 @@ function UserRegister(){
                     name = "addressline1"
                     type="text"
                     value = {registerData.addressline1}
-                    onChange = {handleChange}></input>
+                    onChange = {handleChange}
+                    required></input>
                 </p>
 
                 <p className = "mt-2 ml-10">
