@@ -1,16 +1,31 @@
-import React, { useState } from 'react';
+"use client";
+import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function ViewProfile(){
 
+    const [currentTimeDate, setCurrentTimeDate] = useState(new Date());
+    const [Mounted, setMounted] = useState(false);
+
+    useEffect(() =>{
+        setMounted(true);
+        const intervalID = setInterval(() => { setCurrentTimeDate(new Date());
+        }, 1000);
+
+        return () => clearInterval(intervalID);
+    }, []);
+
+    const CurrentDate = currentTimeDate.toLocaleDateString();
+    const CurrentTime = currentTimeDate.toLocaleTimeString();
+
     return(
         <main>
             <nav><Header /></nav>
             <div className = "flex mt-3">
                 <button className = "font-sans ml-2"><Link href = "/user-home">Back</Link></button>
-                <p className = "absolute right-0 mr-2">Time</p>
+                {Mounted && (<p className = "absolute right-0 mr-2">Current Time: {CurrentTime}, {CurrentDate}</p>)}
             </div>
             <div className ="flex flex-col items-center justify-center w-full px-20 pt-10">
                 <img className = "h-auto max-w-full rounded-full" src = "/images/temp id.jpg" alt="temp"

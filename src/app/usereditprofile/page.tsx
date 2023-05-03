@@ -1,15 +1,32 @@
-import React from 'react';
+"use client";
+import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function EditProfile(){
+
+    const [CurrentTimeDate, setCurrentTimeDate] = useState(new Date());
+    const [Mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        const interval = setInterval(() => { setCurrentTimeDate(new Date());
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const CurrentDate = CurrentTimeDate.toLocaleDateString();
+    const CurrentTime = CurrentTimeDate.toLocaleTimeString();
+
+
     return(
         <main>
             <nav><Header /></nav>
             <div className = "flex mt-3 mb-2">
                 <button className = "ml-2 font-sans"><Link href = "/userviewprof">Back</Link></button>
-                <p className = "absolute right-0 mr-2">Time: </p>
+                {Mounted && (<p className = "absolute right-0 mr-2">Time: {CurrentTime}, {CurrentDate}</p>)}
             </div>
             <figure className = "md:flex w-auto mt-5 ml-2">
                 <img className = "h-auto max-w-full rounded-full" src = "/images/temp id.jpg" alt = "temp"
