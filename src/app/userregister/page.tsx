@@ -19,7 +19,7 @@ interface RegisterData {
     residentid: number;
     addressline1: string;
     addressline2?: string;
-    photo?: File;
+    photo?: Blob;
     password: string;
 }
 
@@ -68,7 +68,11 @@ function UserRegister(){
     const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0]
         if(file){
-            setRegisterData((prevState) => ({ ...prevState, photo: file}));
+            const reader = new FileReader()
+            reader.onloadend = () =>{
+                setRegisterData((prevState) => ({ ...prevState, photo: new Blob([reader.result as ArrayBuffer])}));
+            }
+            reader.readAsArrayBuffer(file);
         }
     };
 
