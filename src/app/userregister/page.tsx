@@ -91,7 +91,7 @@ function UserRegister(){
                     <button className = "ml-4 font-sans"><Link href = "/">Back</Link></button>
                     <img className = "mb-2 ml-auto" src = "/images/tempB.png" width = {100} height = {100}></img>
                 </div>
-                <div className = "mt-5 mb-6 ml-9 flex">
+                <div className = "mt-5 mb-6 ml-20 mr-4 flex">
                     <p className = "mt-2 ml-3">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             First Name:
@@ -141,9 +141,9 @@ function UserRegister(){
                         ></input>
                     </p>
                 </div>
-                <div className = "mt-5 mb-6 ml-9 flex">
+                <div className = "mt-8 mb-8 ml-20 mr-4 flex">
                     <p className = "mt-5 ml-3">Gender: </p>
-                    <p className = "mt-5 ml-7 mr-5">
+                    <p className = "mt-5 ml-5 mr-3">
                         <input className = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                         type = "radio"
                         id = "male"
@@ -155,7 +155,7 @@ function UserRegister(){
                             Male
                         </label>
                     </p>
-                    <p className = "mt-5 ml-7 mr-5">
+                    <p className = "mt-5 ml-5">
                         <input className = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                         type = "radio"
                         id = "female"
@@ -167,8 +167,8 @@ function UserRegister(){
                             Female
                         </label>
                     </p>
-                    <p className = "mt-5 ml-7 mr-1">Insert Photo: </p>
-                    <div className = "mt-2 ml-7 mr-4">
+                    <p className = "mt-5 pl-20">Insert Photo: </p>
+                    <div className = "mt-2 ml-8 pr-20">
                         <label htmlFor = "photo" className = "cursor-pointer mr-4">
                             {registerData.photo ? (
                                 <img src = {URL.createObjectURL(registerData.photo)} alt = "Profile" className = "inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100"/>
@@ -199,13 +199,13 @@ function UserRegister(){
                     </p>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-9 flex">
-                    <p className = "mr-18 ml-4">
-                        <label>Birthdate: </label>
+                <div className = "mt-10 mb-6 ml-20 mr-4 flex">
+                    <p className = "mr-18 ml-3">
+                        <label className = "mr-3">Birthdate: </label>
                         <input type = "date" id = "birthdate" name = "birthdate" value = {registerData.birthdate} onChange={handleChange}>
                         </input>
                     </p>
-                    <p className = "ml-12 mt-3 flex">Civil Status: </p>
+                    <p className = "ml-16 mt-3 flex">Civil Status: </p>
                     <div className = "mr-2 ml-15 content-start grid grid-flow-rows-2"> 
                         <p className = "ml-2 mr-2 mb-2 mt-3 pl-3 flex">
                             <input className = "mt-2 mb-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
@@ -273,9 +273,9 @@ function UserRegister(){
                         </p>
                     </div>
 
-                    <p className = "ml-12 flex">Resident Type:  </p>
-                    <div className = "mr-4 ml-15 content-start grid grid-flow-rows-2"> 
-                        <p className = "ml-2 mr-2 mb-2 pl-3 flex">
+                    <p className = "ml-16 mt-3 flex">Resident Type:  </p>
+                    <div className = "mr-2 ml-15 content-start grid grid-flow-rows-2"> 
+                        <p className = "ml-2 mr-2 mb-2 mt-3 pl-3 flex">
                             <input className = "mt-2 mb-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                 id = "temporary"
                                 type = "radio"
@@ -303,7 +303,7 @@ function UserRegister(){
                     </div>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-9 flex">
+                <div className = "mt-10 mb-6 ml-20 mr-4 flex">
                     <p className = "mt-2 ml-3 mr-10">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Email Address:
@@ -330,7 +330,7 @@ function UserRegister(){
                     </p>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-9 flex">
+                <div className = "mt-10 mb-6 ml-20 mr-4 flex">
                     <p className = "mt-2 ml-3 mr-10">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Occupation:
@@ -357,12 +357,12 @@ function UserRegister(){
                     </p>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-9 flex">
+                <div className = "mt-10 mb-6 ml-20 mr-4 flex">
                     <p className = "mt-2 ml-3 mr-10">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Address Line 1:
                         </label>
-                        <input className = "shadow appearance-none border rounded py-2 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        <input className = "shadow appearance-none border rounded w-full py-2 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="addressline1" 
                         name = "addressline1"
                         type="text"
@@ -384,7 +384,7 @@ function UserRegister(){
                     </p>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-9 flex">
+                <div className = "mt-10 mb-6 ml-20 mr-2 flex">
                     <p className = "mt-2 ml-3 mr-10">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Password:
@@ -397,12 +397,12 @@ function UserRegister(){
                         value = {registerData.password}
                         onChange = {handleChange}
                         required></input>
-                        <span className = "ml-5">Password must contain: a minimum of 8 characters, at least one uppercase, at least one lowercase, at least one number
+                        <span className = "mt-5 pl-4">Password contains at least: One Uppercase, One Lowercase, One Number, 8 Characters
                         </span>
                     </p>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-9 flex">
+                <div className = "mt-10 mb-6 ml-20 mr-4 flex">
                     <button 
                     type = "submit" 
                     className = "mt-5 bg-blue-500 hover:bg-blue-700 border-none text-white text-center flex items-center px-4 py-2 rounded mb-2"
