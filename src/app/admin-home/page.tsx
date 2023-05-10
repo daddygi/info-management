@@ -63,20 +63,21 @@ export default function Admin() {
         </div>
         
         <div className = "flex justify-center flex-col items-center top-0 mr-10">
-          <svg className="h-16 w-16 text-blue-600"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
+        <svg className="h-16 w-16 text-blue-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="21 8 21 21 3 21 3 8" />  
+          <rect x="1" y="3" width="22" height="5" />  
+          <line x1="10" y1="12" x2="14" y2="12" />
+        </svg>
 
           <button
             className="border-2 border-blue-500 text-blue-500 rounded-full px-12 py-2 inline-block font semibold hover:bg-blue-500 hover:text-white"
           >
-            <Link href = "/admin-pages/contactdevs">Contact Developers</Link>
+            <Link href = "/admin-pages/benefits">Benefits</Link>
           </button>
         </div>
       </div>
 
       <div className = "flex items-center justify-between pt-36 pb-10">
-        <div className = "flex justify-center flex-col items-center top-20 left-20 pl-80">
+        <div className = "flex justify-center flex-col items-center top-24 left-20 pl-80">
             <svg className="h-16 w-16 text-blue-600"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
             </svg>
@@ -88,19 +89,16 @@ export default function Admin() {
             </button>
         </div>
 
-        <div className = "flex justify-center flex-col items-center top-20 right-20 pr-80">
-          <svg className="h-16 w-16 text-blue-600"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
-            <polyline points="21 8 21 21 3 21 3 8" />  
-            <rect x="1" y="3" width="22" height="5" />  
-            <line x1="10" y1="12" x2="14" y2="12" />
+        <div className = "flex justify-center flex-col items-center top-24 right-24 pr-64">
+          <svg className="h-16 w-16 text-blue-600"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
           </svg>
-            <Link href = "/admin-pages/benefits">
-              <button
-                className="border-2 border-blue-500 text-blue-500 rounded-full px-12 py-2 inline-block font semibold hover:bg-blue-500 hover:text-white"
-              >
-                Benefits
-              </button>
-            </Link>
+
+          <button
+            className="border-2 border-blue-500 text-blue-500 rounded-full px-12 py-2 inline-block font semibold hover:bg-blue-500 hover:text-white"
+          >
+            <Link href = "/admin-pages/contactdevs">Contact Developers</Link>
+          </button>
         </div>
       </div>
     </main>
