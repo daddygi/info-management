@@ -1,37 +1,38 @@
-import React from "react";
+"use client";
+import React, {useState, useEffect } from "react";
 import Header from "../components/Header";
-import Image from "next/image";
+import NavBarAdmin from "../components/NavBarAdmin";
 import Button from "../components/LogoutButton";
+import Link from "next/link";
 
 export default function Admin() {
+
+  const [currentTimeDate, setTimeDate] = useState(new Date());
+  const [Mounted, setMounted] = useState(false);
+
+  useEffect(() =>{
+    setMounted(true);
+    const IntervalID = setInterval(() => { setTimeDate(new Date());
+    }, 1000);
+
+    return () => clearInterval(IntervalID);
+  })
+
+  const CurrentDate = currentTimeDate.toLocaleDateString();
+  const CurrentTime = currentTimeDate.toLocaleTimeString();
+
   return (
     <main>
       <nav>
         <Header />
+        <NavBarAdmin />
       </nav>
-      <div className="mt-2 ml-3">
+      <div className="mt-4 ml-3 mb-3 flex">
         <Button />
-      </div>
-      {/* dashboard */}
-      <div className="flex items-center justify-between pt-40">
-        <a
-          href="#"
-          className=" ml-20 border-2 border-blue-500 text-blue-500 rounded-full px-12 py-2 inline-block font semibold hover:bg-blue-500 hover:text-white"
-        >
-          Add Inhabitants
-        </a>
-        <a
-          href="#"
-          className="border-2 border-blue-500 text-blue-500 rounded-full px-12 py-2 inline-block font semibold hover:bg-blue-500 hover:text-white"
-        >
-          Inhabitants
-        </a>
-        <a
-          href="#"
-          className="mr-20 border-2 border-blue-500 text-blue-500 rounded-full px-12 py-2 inline-block font semibold hover:bg-blue-500 hover:text-white"
-        >
-          Contact Developers
-        </a>
+        <div className = "mb-4 font-sans absolute right-0 mr-4 text-center">
+          {Mounted && (<p>{CurrentDate} - {CurrentTime}</p>)}
+          <p>Administrator</p>
+        </div>
       </div>
     </main>
   );
