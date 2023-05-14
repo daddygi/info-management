@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -14,21 +15,25 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.0",
     "@types/node": "18.15.11",
-    "@types/react": "18.0.35",
-    "@types/react-dom": "18.0.11",
+    "anchor": "^1.4.1",
     "autoprefixer": "10.4.14",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "flowbite": "^1.6.5",
     "mdb-react-ui-kit": "^6.0.0",
-    "next": "13.2.4",
+    "next": "^13.4.1",
     "next-navigation": "^1.0.6",
     "postcss": "8.4.21",
-    "react": "18.2.0",
+    "react": "^18.2.0",
+    "react-awesome-shapes": "^0.1.12",
     "react-datepicker": "^4.11.0",
-    "react-dom": "18.2.0",
+    "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "tailwindcss": "3.3.1",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4"
   }
 }
