@@ -1,0 +1,25 @@
+:root{
+    --mainColor :#c3fff3;
+    --secondaryColor: #eee;
+    --textColor: black;
+}
+
+nav a {
+    
+	margin: 0 13rem;
+	color: var(--textColor);
+	text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+   
+    
+    
+}
+
+nav a:hover {
+	color: var(--secondaryColor);
+}
+
+
+
+

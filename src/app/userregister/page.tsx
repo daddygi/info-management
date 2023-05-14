@@ -21,7 +21,6 @@ interface RegisterData {
     addressline2?: string;
     photo?: Blob;
     password: string;
-    dateregistered: Date;
 }
 
 
@@ -44,10 +43,10 @@ function UserRegister(){
         addressline2: "",
         password: "",
         photo: undefined,
-        dateregistered: new Date(),
     });
 
     const [errorMessage, setErrorMessage] = useState('');
+
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>{
@@ -66,15 +65,6 @@ function UserRegister(){
             setErrorMessage('Password must be at least: 8 characters long, 1 uppercase letter, 1 lowercase letter, 1 number');
             return;
         }
-
-        const inhabitants = JSON.parse(localStorage.getItem('inhabitants') || '[]') as RegisterData[]
-        inhabitants.push(registerData)
-        localStorage.setItem('inhabitants', JSON.stringify(inhabitants))
-        setRegisterData({
-            firstname: "", middleinitial: "", lastname: "", suffix: "", gender: "", age: 0, birthdate: "",
-            civilstatus: "", residenttype: "", emailaddress: "", contactnumber: "", occupation: "", residentid: 0,
-            addressline1: "", addressline2: "", password: "", photo: undefined, dateregistered: new Date(),
-        })
 
         setShowSuccessModal(true);
     };

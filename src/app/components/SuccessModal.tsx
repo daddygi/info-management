@@ -6,7 +6,7 @@ interface SuccessModalProps{
 }
 
 const SuccessModal: React.FC<SuccessModalProps> = ({ message1, message2 }) => {
-
+3
     const handleLoginRoute = () =>{
         window.location.href = "/";
     };

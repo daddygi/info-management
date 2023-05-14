@@ -1,0 +1,33 @@
+body{
+    background-image: url(sanseb.jpg);
+    background-repeat: no-repeat;
+    background-size:100% 500% ;
+    background-position:0px 200px;
+
+}
+
+
+
+.button{
+    margin-left:16px ;
+    font-family: sans-serif;
+    background-color: rgb(28 100 242);
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding-left : 32px;
+    padding-right: 32px;
+    font-weight: 700;
+    margin-top: -1.5%;
+    border-radius: 12px;
+}
+
+.bluerect{
+    position: static;
+    height: 90px;
+    width: 2222px;
+    margin-top:-82px;
+    background: rgb(81, 184, 239);
+}
+

@@ -1,101 +1,15 @@
-"use client";
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from '../../components/Header';
-import NavBarAdmin from '@/app/components/NavBarAdmin';
 import Link from 'next/link';
-import UpdateProfile from '../../components/UpdateProfile';
 
-interface Inhabitant {
-    firstname: string;
-    middleinitial: string;
-    lastname: string;
-    suffix?: string;
-    gender: string;
-    age: number;
-    birthdate: string;
-    civilstatus: string;
-    residenttype: string;
-    emailaddress?: string;
-    contactnumber?: string;
-    occupation: string;
-    residentid: number;
-    addressline1: string;
-    addressline2?: string;
-    photo?: Blob;
-    password: string;
-    dateregistered: string;
-    onDeletePhoto?: () => void;
-}
-
-const Inhabitants = () => {
-
-    const [inhabitants, setInhabitants] = useState<Inhabitant[]>([]);
-    const [showModal, setShowModal] = useState(false);
-    const [currentInhabitant, setCurrentInhabitant] = useState<Inhabitant | null>(null);
-
-    const handleShowModal = () => {
-        setCurrentInhabitant(null);
-        setShowModal(true);
-    }
-
-    const handleEditInhabitant = (inhabitant : Inhabitant) =>{
-        setCurrentInhabitant(inhabitant);
-        setShowModal(true);
-    }
-
-    const handleCancel = () => {
-        setCurrentInhabitant(null);
-        setShowModal(false);
-    }
-
-    useEffect(() => {
-        const data = JSON.parse(localStorage.getItem('inhabitants') || '[]') as Inhabitant[]
-        setInhabitants(data)
-    }, [])
-
-    const handleDeleteRow = (index: number) =>{
-        const newInhabitants = [...inhabitants]
-        newInhabitants.splice(index, 1)
-        localStorage.setItem('inhabitants', JSON.stringify(newInhabitants))
-        setInhabitants(newInhabitants)
-    }
-
-    const [sortBy, setSortBy] = useState('')
-    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-
-    const handleSort = (sortBy: string) => {
-        setSortBy(sortBy);
-        setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-
-        const sortedInhabitants = [...inhabitants].sort((a,b) => {
-            if (sortBy === 'age'){
-                return sortOrder === 'asc' ? a.age - b.age : b.age - a.age;
-            } else if (sortBy === 'gender'){
-                return sortOrder === 'asc' ? a.gender.localeCompare(b.gender) : b.gender.localeCompare(a.gender);
-            } else if (sortBy === 'dateregistered'){
-                return sortOrder === 'asc' ? Date.parse(a.dateregistered) - Date.parse(b.dateregistered) : Date.parse(b.dateregistered) - Date.parse(a.dateregistered);
-            }
-            return 0;
-        });
-
-        setInhabitants(sortedInhabitants);
-    }
-
-    const handleUpdate = (data: Partial<Inhabitant>) => {
-        const newInhabitants = inhabitants.map((inhabitant) => 
-        inhabitant === currentInhabitant ? { ...inhabitant, ...data} : inhabitant);
-        localStorage.setItem('inhabitants', JSON.stringify(newInhabitants));
-        setInhabitants(newInhabitants);
-        setCurrentInhabitant(null);
-        setShowModal(false);
-    }
+export default function Inhabitants(){
 
     return(
         <main>
-            <nav><Header /> <NavBarAdmin /></nav>
+            <nav><Header /></nav>
             <div className = "mt-5">
                 <div className = "font-sans ml-4 flex">
-                    <button className = "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><Link href = "/admin-home">Back</Link></button>
+                    <button className = "font-sans ml-2"><Link href = "/admin-home">Back</Link></button>
                     <div className = "mb-4 font-sans absolute right-0 mr-4 text-center">
                         <p>Time: Date:</p>
                         <p>Administrator</p>
@@ -111,15 +25,6 @@ const Inhabitants = () => {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"/>
                         </svg>
                     </button>
-                    <select 
-                    onChange = {(e) => handleSort(e.target.value)}
-                    value = {sortBy}
-                    >
-                        <option value = "">--Select Sorting Option--</option>
-                        <option value = "age">Age</option>
-                        <option value = "gender">Gender</option>
-                        <option value = "dateregistered">Registration Date</option>
-                    </select>
                 </div>
 
                 <div className = "mt-5 flex justify-center items-center">
@@ -138,44 +43,16 @@ const Inhabitants = () => {
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Birthdate</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Email Address</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Contact Number</th>
-                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Actions</th>
+                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Update Inhabitant</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {inhabitants.map((inhabitant, index) => (
-                                <tr className = "border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative">
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{index + 1}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.dateregistered}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.suffix} {inhabitant.lastname}, {inhabitant.firstname} {inhabitant.middleinitial}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.age}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.residentid}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.addressline1} {inhabitant.addressline2}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.civilstatus}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.occupation}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.gender}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.birthdate}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.emailaddress}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.contactnumber}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell flex justify-center items center mb-1">
-                                        <button type = "button" 
-                                        onClick = {() => handleEditInhabitant(inhabitant)} className = "bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 rounded-md mt-1 mb-1">Update</button>
-                                        <button onClick = {() => handleDeleteRow(index)}>Delete</button>
-                                    </td>
-                                </tr>
-                            ))}
+                            <tr className = "border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative">
+                            </tr>
                         </tbody>
                     </table>
-                    {showModal && (
-                        <div className = "modal">
-                            <div className = "modal-content">
-                                <UpdateProfile inhabitant = {currentInhabitant!} onUpdate = {handleUpdate} onCancel = {handleCancel}/>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>
         </main>
     );
 }
-
-export default Inhabitants;
