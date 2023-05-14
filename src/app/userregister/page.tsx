@@ -48,7 +48,6 @@ function UserRegister(){
     });
 
     const [errorMessage, setErrorMessage] = useState('');
-
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>{

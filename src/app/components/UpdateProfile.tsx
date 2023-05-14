@@ -69,25 +69,9 @@ const UpdateProfile: React.FC<Props> = ({ inhabitant, onUpdate ,onCancel}) => {
             <div className = "bg-white shadow-lg rounded-lg p-6">
                 <form onSubmit = {handleSubmit}>
                     <div className = "flex flex-col mb-4">
-                        <label className = "mb-2 font-bold text-sm text-gray-900" htmlFor = "photo">
-                            Update Photo
-                        </label>
-                        <div className = "flex mb-4">
-                            {formValues.photo && formValues.photo instanceof Blob && (
-                                <div className = "w-16 h-16 mr-4">
-                                    <img className = "w-full h-full object-cover" src = {URL.createObjectURL(formValues.photo)} alt = "Inhabitant" />
-                                </div>
-                            )}
-                                <div className = "w-16 h-16 bg-gray-200 mr-4 rounded-full"></div>
-                            <div className = "flex flex-col">
-                                <input className = "mb-2" type = "file" name = "photo" onChange = {handleUpdatePhoto} />
-                                <div className = "flex">
-                                    {formValues.photo && (
-                                        <button className = "bg-blue-500 text-white px-4 py-2 rounded mr-2" type = "button" onClick = {handleDeletePhoto}>Delete Photo</button>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
+                        {formValues.photo && formValues.photo instanceof Blob ? (
+                            <div className = ""></div>
+                        )}
                     </div>
 
                     <div>
