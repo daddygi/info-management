@@ -72,7 +72,7 @@ function AddInhabitants(){
             addressline1: "", addressline2: "", password: "", photo: undefined, dateregistered: new Date(),
         })
 
-        window.location.href = '/admin-pages/inhabitants'
+        window.location.href = '/admin-pages/inhabitantstable'
     };
 
     const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) =>{

@@ -85,6 +85,20 @@ const Inhabitants = () => {
         setCurrentInhabitant(null);
     }
 
+    const [currentTimeDate, setCurrentTimeDate] = useState(new Date());
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() =>{
+        setIsMounted(true);
+        const IntervalID = setInterval(() => { setCurrentTimeDate(new Date());}, 1000);
+
+        return () => clearInterval(IntervalID);
+    })
+
+    const CurrentDate = currentTimeDate.toLocaleDateString();
+    const CurrentTime = currentTimeDate.toLocaleTimeString();
+    
+
     return(
         <main>
             <nav><Header /> <NavBarAdmin /></nav>
@@ -92,7 +106,7 @@ const Inhabitants = () => {
                 <div className = "font-sans ml-4 flex">
                     <button className = "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><Link href = "/admin-home">Back</Link></button>
                     <div className = "mb-4 font-sans absolute right-0 mr-4 text-center">
-                        <p> - </p>
+                        {isMounted && (<p>{CurrentDate} - {CurrentTime}</p>)}
                         <p>Administrator</p>
                     </div>
                 </div>
@@ -138,8 +152,7 @@ const Inhabitants = () => {
                         </thead>
                         <tbody>
                             {inhabitants.map((inhabitant, index) => (
-                                <tr className = "border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative" key = {inhabitant.residentid}
-                                onClick = {() => handleUpdateClick(inhabitant.residentid)}>
+                                <tr className = "border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative" key = {inhabitant.residentid}>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{index + 1}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{new Date(inhabitant.dateregistered).toLocaleDateString()}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.suffix} {inhabitant.lastname}, {inhabitant.firstname} {inhabitant.middleinitial}</td>

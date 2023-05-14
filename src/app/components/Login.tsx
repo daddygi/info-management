@@ -1,6 +1,16 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import ForgotPassword from '../components/ForgotPassword';
 
 export default function Login() {
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleForgotPasswordButton = () => {
+    setShowModal(true);
+  };
+
+
   return (
     <main className=" flex flex-col items-center justify-center w-full flex-1 px-20 pt-40 text-center ">
       {/* Sign in */}
@@ -15,9 +25,6 @@ export default function Login() {
             </h2>
             <div className="border-2 w-10 border-blue-500 inline-block mb-2" />
           </div>
-          <p className="text-zinc-500 mt-2 ">
-            Username (Last Name + Birthdate MM/DD/YY)
-          </p>
           <div className="flex flex-col items-center mt-5">
             <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
               <input
@@ -40,9 +47,9 @@ export default function Login() {
                 <input type="checkbox" name="remember" className="mr-1" />
                 Remember me
               </label>
-              <a href="#" className="text-xs">
+              <button className="text-xs" onClick = {handleForgotPasswordButton}>
                 Forgot Password?
-              </a>
+              </button>
             </div>
             <a
               href="#"
@@ -64,6 +71,11 @@ export default function Login() {
           </a>
         </div>
       </div>
+      {showModal && (
+        <ForgotPassword header = "Password Reset Assistance" header2 = "Forgot Your Password?"
+        message = "We're sorry, but we're unable to reset your password online. For assistance, please contact your barangay or visit them in person. They will be able to assist you with your account."
+        />
+      )}
     </main>
   );
 }
