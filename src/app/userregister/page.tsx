@@ -5,7 +5,7 @@ import SuccessModal from '../components/SuccessModal';
 
 interface RegisterData {
     firstname: string;
-    middleinitial: string;
+    middlename: string;
     lastname: string;
     suffix?: string;
     gender: string;
@@ -16,6 +16,7 @@ interface RegisterData {
     emailaddress?: string;
     contactnumber?: string;
     occupation: string;
+    citizenship: string;
     residentid: number;
     addressline1: string;
     addressline2?: string;
@@ -29,7 +30,7 @@ function UserRegister(){
 
     const [registerData, setRegisterData] = useState<RegisterData>({
         firstname: "",
-        middleinitial: "",
+        middlename: "",
         lastname: "",
         gender: "",
         age: 0,
@@ -39,6 +40,7 @@ function UserRegister(){
         emailaddress: "",
         contactnumber: "",
         occupation: "",
+        citizenship: "",
         residentid: 0,
         addressline1: "",
         addressline2: "",
@@ -71,8 +73,8 @@ function UserRegister(){
         inhabitants.push(registerData)
         localStorage.setItem('inhabitants', JSON.stringify(inhabitants))
         setRegisterData({
-            firstname: "", middleinitial: "", lastname: "", suffix: "", gender: "", age: 0, birthdate: "",
-            civilstatus: "", residenttype: "", emailaddress: "", contactnumber: "", occupation: "", residentid: 0,
+            firstname: "", middlename: "", lastname: "", suffix: "", gender: "", age: 0, birthdate: "",
+            civilstatus: "", residenttype: "", emailaddress: "", contactnumber: "", occupation: "", citizenship: "",residentid: 0,
             addressline1: "", addressline2: "", password: "", photo: undefined, dateregistered: new Date(),
         })
 
@@ -104,7 +106,7 @@ function UserRegister(){
                 <div className = "mt-5 mb-6 ml-20 mr-4 flex">
                     <p className = "mt-2 ml-3">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
-                            First Name:
+                            Firstname:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="firstname" 
@@ -116,19 +118,19 @@ function UserRegister(){
                     </p>
                     <p className = "mt-2 ml-7">
                         <label className = "ml-4 block text-gray-700 text-sm font-bold mb-2">
-                            Middle Initial:
+                            Middlename:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                        id="middleinitial" 
-                        name = "middleinitial"
+                        id="middlename" 
+                        name = "middlename"
                         type="text"
-                        value = {registerData.middleinitial}
+                        value = {registerData.middlename}
                         onChange = {handleChange}
                         required></input>
                     </p>
                     <p className = "mt-2 ml-7">
                         <label className = "ml-4 block text-gray-700 text-sm font-bold mb-2">
-                            Last Name:
+                            Lastname:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="lastname" 
@@ -215,7 +217,7 @@ function UserRegister(){
                         <input type = "date" id = "birthdate" name = "birthdate" value = {registerData.birthdate} onChange={handleChange}>
                         </input>
                     </p>
-                    <p className = "ml-16 mt-3 flex">Civil Status: </p>
+                    <p className = "ml-10 mt-3 flex">Civil Status: </p>
                     <div className = "mr-2 ml-15 content-start grid grid-flow-rows-2"> 
                         <p className = "ml-2 mr-2 mb-2 mt-3 pl-3 flex">
                             <input className = "mt-2 mb-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
@@ -284,7 +286,7 @@ function UserRegister(){
                     </div>
 
                     <p className = "ml-16 mt-3 flex">Resident Type:  </p>
-                    <div className = "mr-2 ml-15 content-start grid grid-flow-rows-2"> 
+                    <div className = "mr-2 ml-10 content-start grid grid-flow-rows-2"> 
                         <p className = "ml-2 mr-2 mb-2 mt-3 pl-3 flex">
                             <input className = "mt-2 mb-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                 id = "temporary"
@@ -309,6 +311,22 @@ function UserRegister(){
                             <label htmlFor = "permanent" className = "mt-px inline-block pl-[0.15rem] hover:cursor-pointer">
                                 Permanent Resident
                             </label>
+                        </p>
+                    </div>
+
+                    <div className = "ml-2 mr-10">
+                        <p className = "ml-16 mt-3 flex">
+                            <label htmlFor= "citizenship">Citizenship: </label> 
+                            <select id = "citizenship" name = "citizenship" value = {registerData.citizenship} onChange = {handleChange}>
+                                <option value = "">Select Citizenship</option>
+                                <option value = "Filipino Citizen">Filipino Citizen</option>
+                                <option value = "Naturalized Citizen">Naturalized Citizen</option>
+                                <option value = "Dual Citizen">Dual Citizen</option>
+                                <option value = "Non-Citizen">Non-Citizen</option>
+                                <option value = "Stateless">Stateless</option>
+                                <option value = "Refugee">Refugee</option>
+                                <option value = "Diplomatic / Consular Personnel">Diplomatic / Consular Person</option>
+                            </select>
                         </p>
                     </div>
                 </div>

@@ -4,10 +4,12 @@ import Header from '../../components/Header';
 import NavBarAdmin from '../../components/NavBarAdmin';
 import Link from 'next/link';
 import DeleteModal from '../../components/DeleteModal';
+import UpdateInhabitants from '../../components/UpdateInhabitants';
+
 
 interface Inhabitant {
     firstname: string;
-    middleinitial: string;
+    middlename: string;
     lastname: string;
     suffix?: string;
     gender: string;
@@ -18,6 +20,7 @@ interface Inhabitant {
     emailaddress?: string;
     contactnumber?: string;
     occupation: string;
+    citizenship: string;
     residentid: number;
     addressline1: string;
     addressline2?: string;
@@ -30,7 +33,6 @@ const Inhabitants = () => {
 
     const [inhabitants, setInhabitants] = useState<Inhabitant[]>([]);
     const [currentInhabitant, setCurrentInhabitant] = useState<Inhabitant | null>(null);
-    const [showModal, setShowModal] = useState(false);
     const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
     useEffect(() => {
@@ -74,7 +76,8 @@ const Inhabitants = () => {
     }
 
     const handleUpdateClick = (residentid: number) =>{
-        window.location.href = `/admin-pages/updateprofile/${residentid}`;
+        const inhabitantToUpdate = inhabitants.find((inhabitant) => inhabitant.residentid === residentid);
+        setCurrentInhabitant(inhabitantToUpdate || null);
     };
 
     const handleUpdate = (data: Partial<Inhabitant>) => {
@@ -137,16 +140,18 @@ const Inhabitants = () => {
                             <tr className = "border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative" >
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">No.</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Date Registered</th>
-                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Suffix, Lastname, Firstname, Middle Initial</th>
+                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Suffix, Lastname, Firstname, Middlename</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Age</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Resident #</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Address</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Civil Status</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Occupation</th>
+                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Citizenship</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Gender</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Birthdate</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Email Address</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Contact Number</th>
+                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Photo</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Actions</th>
                             </tr>
                         </thead>
@@ -155,20 +160,26 @@ const Inhabitants = () => {
                                 <tr className = "border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative" key = {inhabitant.residentid}>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{index + 1}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{new Date(inhabitant.dateregistered).toLocaleDateString()}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.suffix} {inhabitant.lastname}, {inhabitant.firstname} {inhabitant.middleinitial}</td>
+                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.suffix} {inhabitant.lastname}, {inhabitant.firstname} {inhabitant.middlename}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.age}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.residentid}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.addressline1} {inhabitant.addressline2}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.civilstatus}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.occupation}</td>
+                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.citizenship}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.gender}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.birthdate}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.emailaddress}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.contactnumber}</td>
+                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">
+                                        {inhabitant.photo instanceof Blob && inhabitant.photo && (
+                                            <img src = {URL.createObjectURL(inhabitant.photo)} alt = "inhabitant"/>
+                                        )}
+                                    </td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell flex justify-center items center mb-1">
                                         <button type = "button" 
                                         className = "bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 rounded-md mt-1 mb-3"
-                                        >Update</button>
+                                        ><Link href = "/admin-pages/UpdateInhabitants">Update</Link></button>
                                         <button onClick = {() => handleDeleteRow(index)} className = "mb-3 bg-blue-500 hover:bg-blue-700 text-white rounded-md px-2 py-1">Delete</button>
                                     </td>
                                 </tr>

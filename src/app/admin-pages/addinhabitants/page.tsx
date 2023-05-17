@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 interface Inhabitant {
     firstname: string;
-    middleinitial: string;
+    middlename: string;
     lastname: string;
     suffix?: string;
     gender: string;
@@ -18,6 +18,7 @@ interface Inhabitant {
     emailaddress?: string;
     contactnumber?: string;
     occupation: string;
+    citizenship: string;
     residentid: number;
     addressline1: string;
     addressline2?: string;
@@ -30,7 +31,7 @@ function AddInhabitants(){
 
     const [inhabitant, setAddInhabitants] = useState<Inhabitant>({
         firstname: "",
-        middleinitial: "",
+        middlename: "",
         lastname: "",
         suffix: "",
         gender: "",
@@ -41,6 +42,7 @@ function AddInhabitants(){
         emailaddress: "",
         contactnumber: "",
         occupation: "",
+        citizenship: "",
         residentid: 0,
         addressline1: "",
         addressline2: "",
@@ -67,8 +69,8 @@ function AddInhabitants(){
         inhabitants.push(inhabitant)
         localStorage.setItem('inhabitants', JSON.stringify(inhabitants))
         setAddInhabitants({
-            firstname: "", middleinitial: "", lastname: "", suffix: "", gender: "", age: 0, birthdate: "",
-            civilstatus: "", residenttype: "", emailaddress: "", contactnumber: "", occupation: "", residentid: 0,
+            firstname: "", middlename: "", lastname: "", suffix: "", gender: "", age: 0, birthdate: "",
+            civilstatus: "", residenttype: "", emailaddress: "", contactnumber: "", occupation: "", citizenship: "",residentid: 0,
             addressline1: "", addressline2: "", password: "", photo: undefined, dateregistered: new Date(),
         })
 
@@ -110,7 +112,7 @@ function AddInhabitants(){
                 <div className = "mt-5 mb-6 ml-20 mr-4 flex">
                     <p className = "mt-2 ml-3">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
-                            First Name:
+                            Firstname:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="firstname" 
@@ -122,19 +124,19 @@ function AddInhabitants(){
                     </p>
                     <p className = "mt-2 ml-7">
                         <label className = "ml-4 block text-gray-700 text-sm font-bold mb-2">
-                            Middle Initial:
+                            Middlename:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                        id="middleinitial" 
-                        name = "middleinitial"
+                        id="middlename" 
+                        name = "middlename"
                         type="text"
-                        value = {inhabitant.middleinitial}
+                        value = {inhabitant.middlename}
                         onChange = {handleChange}
                         required></input>
                     </p>
                     <p className = "mt-2 ml-7">
                         <label className = "ml-4 block text-gray-700 text-sm font-bold mb-2">
-                            Last Name:
+                            Lastname:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="lastname" 
@@ -315,6 +317,22 @@ function AddInhabitants(){
                             <label htmlFor = "permanent" className = "mt-px inline-block pl-[0.15rem] hover:cursor-pointer">
                                 Permanent Resident
                             </label>
+                        </p>
+                    </div>
+
+                    <div className = "ml-2 mr-10">
+                        <p className = "ml-16 mt-3 flex">
+                            <label htmlFor= "citizenship">Citizenship: </label> 
+                            <select id = "citizenship" name = "citizenship" value = {inhabitant.citizenship} onChange = {handleChange}>
+                                <option value = "">Select Citizenship</option>
+                                <option value = "Filipino Citizen">Filipino Citizen</option>
+                                <option value = "Naturalized Citizen">Naturalized Citizen</option>
+                                <option value = "Dual Citizen">Dual Citizen</option>
+                                <option value = "Non-Citizen">Non-Citizen</option>
+                                <option value = "Stateless">Stateless</option>
+                                <option value = "Refugee">Refugee</option>
+                                <option value = "Diplomatic / Consular Personnel">Diplomatic / Consular Person</option>
+                            </select>
                         </p>
                     </div>
                 </div>
