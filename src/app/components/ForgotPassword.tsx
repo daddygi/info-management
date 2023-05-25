@@ -16,8 +16,8 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ header, header2, messag
     return(
         <div className = "fixed inset-0 z-50 flex items-center justify-center">
             <div className = "fixed inset-0 bg-gray-500 opacity-75"></div>
-            <div className = "relative bg-white w-96 max-w-md mx-auto pb-24 mt-3 mb-3">
-                <div className = "bg-blue-400 w-full max-w-md px-8 py-6 border-b-4 border-black items-center justify-between mb-4">
+            <div className = "relative bg-white w-96 max-w-md mx-auto pb-24 mt-3 mb-3 rounded-md">
+                <div className = "bg-blue-400 w-full max-w-md px-28 py-6 border-b-4 border-black items-center justify-between mb-4">
                     <p className = "text-center font-sans font-semibold text-lg">{header}</p>
                 </div>
                 <div className = " flex items-center justify-center">

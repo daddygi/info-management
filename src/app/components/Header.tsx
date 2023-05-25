@@ -8,20 +8,29 @@ function Header() {
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <div className="flex items-center">
             <Image
-              src="/images/adu logo.png"
-              alt="Adu Logo"
+              src="/images/tempB.png"
+              alt="bgrylogo"
               width={100}
               height={100}
             />
           </div>
-          <div className="font-sans text-2xl antialiased font-semibold text-center align-middle">
-            <h2>Republic of the Philippines</h2>
-            <h1>Office of the Barangay Chairman</h1>
-            <h2>Barangay 391, Zone 40, District III, Manila</h2>
+          <div className="font-sans antialiased font-semibold text-center align-middle">
+            <div className = "text-2xl my-4">
+              <h1>Republic of the Philippines</h1>
+              <h1>Office of the Barangay Chairman</h1>
+              <h2>Barangay 391, Zone 40, District III</h2>
+            </div>
+
+            <div className = "text-base">
+              <h3>Address: 1064 Bilibid Viejo St., Corner R. Hidalgo St., Quiapo, Manila</h3>
+              <h5>Tel No. - 828-777-90</h5>
+            </div>
+
           </div>
+
           <div>
             <Image
-              src="/images/tempB.png"
+              src="/images/material3.png"
               alt="Barangay Logo"
               width={100}
               height={100}

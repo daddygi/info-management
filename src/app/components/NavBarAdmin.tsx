@@ -15,12 +15,6 @@ function NavBarAdmin(){
                   </button>
                 </Link>
 
-                <Link href="/admin-pages/announcements">
-                  <button className="text-black hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-lg font-sans font-semibold">
-                    ANNOUNCEMENTS
-                  </button>
-                </Link>
-
                 <Link href="/admin-pages/inhabitantstable">
                   <button className="text-black hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-lg font-sans font-semibold">
                     INHABITANTS

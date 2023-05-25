@@ -24,6 +24,7 @@ interface Inhabitant {
     addressline2?: string;
     photo?: Blob;
     password: string;
+    relationship: string;
     dateregistered: Date;
 }
 
@@ -48,6 +49,7 @@ function AddInhabitants(){
         addressline2: "",
         password: "",
         photo: undefined,
+        relationship: "",
         dateregistered: new Date(),
     });
 
@@ -71,7 +73,7 @@ function AddInhabitants(){
         setAddInhabitants({
             firstname: "", middlename: "", lastname: "", suffix: "", gender: "", age: 0, birthdate: "",
             civilstatus: "", residenttype: "", emailaddress: "", contactnumber: "", occupation: "", citizenship: "",residentid: 0,
-            addressline1: "", addressline2: "", password: "", photo: undefined, dateregistered: new Date(),
+            addressline1: "", addressline2: "", password: "", photo: undefined, relationship: "",dateregistered: new Date(),
         })
 
         window.location.href = '/admin-pages/inhabitantstable'
@@ -386,6 +388,19 @@ function AddInhabitants(){
                         name = "residentid"
                         type="text"
                         value = {inhabitant.residentid}
+                        onChange = {handleChange}
+                        required></input>
+                    </p>
+
+                    <p className = "my-6 mx-12">
+                        <label className = "block text-gray-700 text-sm font-bold mb-2">
+                            Relationship to the Household Head:
+                        </label>
+                        <input className = "shadow appearance-none border rounded py-2 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        id="relationship" 
+                        name = "relationship"
+                        type="text"
+                        value = {inhabitant.relationship}
                         onChange = {handleChange}
                         required></input>
                     </p>

@@ -1,33 +1,18 @@
 "use client";
 import React from "react";
 import Header from "../components/Header";
-import Image from "next/image";
-import Button from "../components/LogoutButton";
 import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/navigation';
-import Link from "next/link";
 import NavBarUser from "../components/NavBarUser";
-import UserCarousel from "../components/UserCarousel";
 
 
-type Props = {
-    firstname: string;
-    lastname: string;
-    middleinitial: string;
-}
-
-const UserHome: NextPage<Props> = ({ firstname, lastname, middleinitial }) => {
+const UserHome: NextPage = () => {
 
   const router = useRouter();
 
   return (
     <main>
       <nav> <Header /> <NavBarUser /> </nav>
-      <div className = "bg-blue-500 border-200 bg-opacity-50 px-4 lg:px-6 py-2.5 shadow-2xl border-black border-b-2">
-        <p className = "text-lg font-sans font-bold">Announcements</p>
-      </div>
-
-      <div><UserCarousel /></div>
 
       <div className = "bg-cover bg-center mt-2" style={{ backgroundImage: `url('/images/brgy-1.png')`, backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
         <div className = "flex items-start">
@@ -99,23 +84,5 @@ const UserHome: NextPage<Props> = ({ firstname, lastname, middleinitial }) => {
     </main>
   );
 }
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) =>{
-
-  const { query } = context;
-  const { firstname, middleinitial, lastname } = query as {
-    firstname: string;
-    lastname: string;
-    middleinitial: string;
-  }
-
-  return{
-    props: {
-      firstname, 
-      middleinitial, 
-      lastname,
-    },
-  };
-};
 
 export default UserHome;

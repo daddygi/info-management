@@ -21,11 +21,12 @@ interface Inhabitant {
     contactnumber?: string;
     occupation: string;
     citizenship: string;
-    residentid: number;
+    residentid: string;
     addressline1: string;
     addressline2?: string;
     photo?: Blob;
     password: string;
+    relationship: string;
     dateregistered: string;
 }
 
@@ -33,25 +34,15 @@ const Inhabitants = () => {
 
     const [inhabitants, setInhabitants] = useState<Inhabitant[]>([]);
     const [currentInhabitant, setCurrentInhabitant] = useState<Inhabitant | null>(null);
-    const [selectedRow, setSelectedRow] = useState<number | null>(null);
+    const [selectedRow, setSelectedRow] = useState< number | null >(null);
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem('inhabitants') || '[]') as Inhabitant[]
         setInhabitants(data)
     }, [])
 
-    const handleDeleteRow = (index: number) =>{
-        setSelectedRow(index);
-    }
-
-    const handleDeleteRowConfirm = () =>{
-        if (selectedRow !== null){
-            const newInhabitants = [...inhabitants]
-            newInhabitants.splice(selectedRow, 1)
-            localStorage.setItem('inhabitants', JSON.stringify(newInhabitants))
-            setInhabitants(newInhabitants)
-            setSelectedRow(null);
-        }
+    const handleDeleteRow = () =>{
+        
     }
 
     const [sortBy, setSortBy] = useState('')
@@ -75,7 +66,7 @@ const Inhabitants = () => {
         setInhabitants(sortedInhabitants);
     }
 
-    const handleUpdateClick = (residentid: number) =>{
+    const handleUpdateClick = (residentid: string) =>{
         const inhabitantToUpdate = inhabitants.find((inhabitant) => inhabitant.residentid === residentid);
         setCurrentInhabitant(inhabitantToUpdate || null);
     };
@@ -86,6 +77,20 @@ const Inhabitants = () => {
         localStorage.setItem('inhabitants', JSON.stringify(newInhabitants));
         setInhabitants(newInhabitants);
         setCurrentInhabitant(null);
+    }
+
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredInhabitants, setFilteredInhabitants] = useState<Inhabitant[]>([]);
+
+    const handleSearchQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const query = event.target.value;
+        setSearchQuery(query);
+
+        const filtered = inhabitants.filter(
+            (inhabitant) =>
+                inhabitant.lastname.toLowerCase().includes(query.toLowerCase())
+        );
+        setFilteredInhabitants(filtered);
     }
 
     const [currentTimeDate, setCurrentTimeDate] = useState(new Date());
@@ -118,27 +123,14 @@ const Inhabitants = () => {
 
                 <div className = "mt-10 mb-4 flex border-gray-600">
                     <p className = "left-0 ml-4 text-center font-sans font-semibold mr-40">View Table</p>
-                    <button className = "pl-50 ml-45">
-                        <svg className="h-12 w-12 text-black"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"/>
-                        </svg>
-                    </button>
-                    <select 
-                    onChange = {(e) => handleSort(e.target.value)}
-                    value = {sortBy}
-                    >
-                        <option value = "">--Select Sorting Option--</option>
-                        <option value = "age">Age</option>
-                        <option value = "gender">Gender</option>
-                        <option value = "dateregistered">Registration Date</option>
-                    </select>
+                    <input type = "text" value = {searchQuery} onChange = {handleSearchQueryChange} placeholder = "Search by lastname" />
                 </div>
 
                 <div className = "mt-5 flex justify-center items-center">
                     <table className = "min-w-full border-collapse block md:table">
                         <thead className = "block md:table-header-group">
                             <tr className = "border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative" >
-                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">No.</th>
+                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Photo</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Date Registered</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Suffix, Lastname, Firstname, Middlename</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Age</th>
@@ -151,14 +143,18 @@ const Inhabitants = () => {
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Birthdate</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Email Address</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Contact Number</th>
-                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Photo</th>
+                                <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Relationship to Household Head</th>
                                 <th className = "font-sans font-bold md:border md:border-grey-500 text-center block md:table-cell">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {inhabitants.map((inhabitant, index) => (
+                            {(searchQuery ? filteredInhabitants: inhabitants).map((inhabitant, index) => (
                                 <tr className = "border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative" key = {inhabitant.residentid}>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{index + 1}</td>
+                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">
+                                        {inhabitant.photo instanceof Blob && inhabitant.photo && (
+                                            <img src = {URL.createObjectURL(inhabitant.photo)} alt = "inhabitant"/>
+                                        )}
+                                    </td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{new Date(inhabitant.dateregistered).toLocaleDateString()}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.suffix} {inhabitant.lastname}, {inhabitant.firstname} {inhabitant.middlename}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.age}</td>
@@ -171,24 +167,16 @@ const Inhabitants = () => {
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.birthdate}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.emailaddress}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.contactnumber}</td>
-                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">
-                                        {inhabitant.photo instanceof Blob && inhabitant.photo && (
-                                            <img src = {URL.createObjectURL(inhabitant.photo)} alt = "inhabitant"/>
-                                        )}
-                                    </td>
+                                    <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell">{inhabitant.relationship}</td>
                                     <td className = "font-sans text-center md:border md:border-grey-500 md:table-cell flex justify-center items center mb-1">
                                         <button type = "button" 
                                         className = "bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 rounded-md mt-1 mb-3"
-                                        ><Link href = "/admin-pages/UpdateInhabitants">Update</Link></button>
-                                        <button onClick = {() => handleDeleteRow(index)} className = "mb-3 bg-blue-500 hover:bg-blue-700 text-white rounded-md px-2 py-1">Delete</button>
+                                        >Update</button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <>
-                        <DeleteModal isOpen = {selectedRow !== null} onContinue = {handleDeleteRowConfirm} onCancel= {() => setSelectedRow(null)} message = "Are you sure? If you delete this profile, you will permanently lose this profile informations."/>
-                    </>
                 </div>
             </div>
         </main>

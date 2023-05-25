@@ -15,10 +15,6 @@ function NavBarUser(){
                                 <button className = "text-black hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-lg font-sans font-semibold">HOME</button>
                             </Link>
 
-                            <Link href = "/user-pages/UserAnnouncement">
-                                <button className = "text-black hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-lg font-sans font-semibold">ANNOUNCEMENTS</button>
-                            </Link>
-
                             <Link href = "/user-pages/userviewprof">
                                 <button className = "text-black hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-lg font-sans font-semibold">VIEW PROFILE</button>
                             </Link>

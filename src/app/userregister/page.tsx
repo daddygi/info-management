@@ -22,6 +22,7 @@ interface RegisterData {
     addressline2?: string;
     photo?: Blob;
     password: string;
+    relationship: string;
     dateregistered: Date;
 }
 
@@ -46,6 +47,7 @@ function UserRegister(){
         addressline2: "",
         password: "",
         photo: undefined,
+        relationship: "",
         dateregistered: new Date(),
     });
 
@@ -75,7 +77,7 @@ function UserRegister(){
         setRegisterData({
             firstname: "", middlename: "", lastname: "", suffix: "", gender: "", age: 0, birthdate: "",
             civilstatus: "", residenttype: "", emailaddress: "", contactnumber: "", occupation: "", citizenship: "",residentid: 0,
-            addressline1: "", addressline2: "", password: "", photo: undefined, dateregistered: new Date(),
+            addressline1: "", addressline2: "", password: "", photo: undefined, relationship: "",dateregistered: new Date(),
         })
 
         setShowSuccessModal(true);
@@ -103,9 +105,9 @@ function UserRegister(){
                     <button className = "ml-4 font-sans"><Link href = "/">Back</Link></button>
                     <img className = "mb-2 ml-auto" src = "/images/tempB.png" width = {100} height = {100}></img>
                 </div>
-                <div className = "mt-5 mb-6 ml-20 mr-4 flex">
-                    <p className = "mt-2 ml-3">
-                        <label className = "block text-gray-700 text-sm font-bold mb-2">
+                <div className = "my-24 mx-24 flex border-spacing-3 border border-gray-400 items-center border-spacing-y-3">
+                    <p className = "my-6 mx-6">
+                        <label className = "mx-4 block text-gray-700 text-sm font-bold mb-2">
                             Firstname:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
@@ -116,8 +118,8 @@ function UserRegister(){
                         onChange = {handleChange}
                         required></input>
                     </p>
-                    <p className = "mt-2 ml-7">
-                        <label className = "ml-4 block text-gray-700 text-sm font-bold mb-2">
+                    <p className = "my-6 mx-6">
+                        <label className = "mx-4 block text-gray-700 text-sm font-bold mb-2">
                             Middlename:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
@@ -128,8 +130,8 @@ function UserRegister(){
                         onChange = {handleChange}
                         required></input>
                     </p>
-                    <p className = "mt-2 ml-7">
-                        <label className = "ml-4 block text-gray-700 text-sm font-bold mb-2">
+                    <p className = "my-6 mx-6">
+                        <label className = "mx-4 block text-gray-700 text-sm font-bold mb-2">
                             Lastname:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
@@ -140,8 +142,8 @@ function UserRegister(){
                         onChange = {handleChange}
                         required></input>
                     </p>
-                    <p className = "mt-2 ml-7">
-                        <label className = "ml-4 block text-gray-700 text-sm font-bold mb-2">
+                    <p className = "my-6 mx-6">
+                        <label className = "mx-4 block text-gray-700 text-sm font-bold mb-2">
                             Suffix:
                         </label>
                         <input className = "shadow appearance-none border rounded py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
@@ -153,9 +155,9 @@ function UserRegister(){
                         ></input>
                     </p>
                 </div>
-                <div className = "mt-8 mb-8 ml-20 mr-4 flex">
-                    <p className = "mt-5 ml-3">Gender: </p>
-                    <p className = "mt-5 ml-5 mr-3">
+                <div className = "my-24 mx-24 flex border-spacing-3 border border-gray-400 items-center border-spacing-y-3">
+                    <p className = "my-6 mx-6">Gender: </p>
+                    <p className = "my-6 mx-8">
                         <input className = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                         type = "radio"
                         id = "male"
@@ -167,7 +169,7 @@ function UserRegister(){
                             Male
                         </label>
                     </p>
-                    <p className = "mt-5 ml-5">
+                    <p className = "my-6 mx-6">
                         <input className = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                         type = "radio"
                         id = "female"
@@ -179,13 +181,13 @@ function UserRegister(){
                             Female
                         </label>
                     </p>
-                    <p className = "mt-5 pl-20">Insert Photo: </p>
-                    <div className = "mt-2 ml-8 pr-20">
-                        <label htmlFor = "photo" className = "cursor-pointer mr-4">
+                    <p className = "my-6 ml-36">Insert Photo: </p>
+                    <div className = "my-6 mx-2">
+                        <label htmlFor = "photo" className = "cursor-pointer mx-1">
                             {registerData.photo ? (
                                 <img src = {URL.createObjectURL(registerData.photo)} alt = "Profile" className = "inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100"/>
                             ) : (
-                            <svg className = "h-12 w-12 rounded-full text-gray-300" fill = "currentColor" viewBox = "0 0 24 24">
+                            <svg className = "h-16 w-16 rounded-full text-gray-300" fill = "currentColor" viewBox = "0 0 24 24">
                                 <path d = "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                             )}
@@ -197,7 +199,7 @@ function UserRegister(){
                         )}
                     </div>
 
-                    <p className = "mt-2 ml-7 mr-4">
+                    <p className = "my-6 mx-36">
                         <label className = "ml-4 block text-gray-700 text-sm font-bold mb-2">
                             Age:
                         </label>
@@ -211,13 +213,13 @@ function UserRegister(){
                     </p>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-20 mr-4 flex">
-                    <p className = "mr-18 ml-3">
+                <div className = "my-24 mx-24 flex border-spacing-3 border border-gray-400 items-center border-spacing-y-3">
+                    <p className = "mx-8 my-6">
                         <label className = "mr-3">Birthdate: </label>
                         <input type = "date" id = "birthdate" name = "birthdate" value = {registerData.birthdate} onChange={handleChange}>
                         </input>
                     </p>
-                    <p className = "ml-10 mt-3 flex">Civil Status: </p>
+                    <p className = "my-6 mx-8 flex">Civil Status: </p>
                     <div className = "mr-2 ml-15 content-start grid grid-flow-rows-2"> 
                         <p className = "ml-2 mr-2 mb-2 mt-3 pl-3 flex">
                             <input className = "mt-2 mb-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
@@ -285,8 +287,8 @@ function UserRegister(){
                         </p>
                     </div>
 
-                    <p className = "ml-16 mt-3 flex">Resident Type:  </p>
-                    <div className = "mr-2 ml-10 content-start grid grid-flow-rows-2"> 
+                    <p className = "mx-8 my-6 flex">Resident Type:  </p>
+                    <div className = "mx-2 content-start grid grid-flow-rows-2"> 
                         <p className = "ml-2 mr-2 mb-2 mt-3 pl-3 flex">
                             <input className = "mt-2 mb-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                 id = "temporary"
@@ -314,10 +316,10 @@ function UserRegister(){
                         </p>
                     </div>
 
-                    <div className = "ml-2 mr-10">
-                        <p className = "ml-16 mt-3 flex">
+                    <div className = "mx-6 my-6">
+                        <p className = "ml-11 mt-3 flex">
                             <label htmlFor= "citizenship">Citizenship: </label> 
-                            <select id = "citizenship" name = "citizenship" value = {registerData.citizenship} onChange = {handleChange}>
+                            <select id = "citizenship" name = "citizenship" value = {registerData.citizenship} onChange = {handleChange} className = "my-8">
                                 <option value = "">Select Citizenship</option>
                                 <option value = "Filipino Citizen">Filipino Citizen</option>
                                 <option value = "Naturalized Citizen">Naturalized Citizen</option>
@@ -331,8 +333,8 @@ function UserRegister(){
                     </div>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-20 mr-4 flex">
-                    <p className = "mt-2 ml-3 mr-10">
+                <div className = "my-24 mx-24 flex border-spacing-3 border border-gray-400 items-center justify-center border-spacing-y-3">
+                    <p className = "my-6 mx-12">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Email Address:
                         </label>
@@ -345,7 +347,7 @@ function UserRegister(){
                         onChange = {handleChange}></input>
                     </p>
 
-                    <p className = "mt-2 ml-10">
+                    <p className = "my-6 mx-12">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Contact Number:
                         </label>
@@ -358,8 +360,8 @@ function UserRegister(){
                     </p>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-20 mr-4 flex">
-                    <p className = "mt-2 ml-3 mr-10">
+                <div className = "my-24 mx-24 flex border-spacing-3 border border-gray-400 items-center justify-center border-spacing-y-3">
+                    <p className = "my-6 mx-12">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Occupation:
                         </label>
@@ -371,7 +373,7 @@ function UserRegister(){
                         onChange = {handleChange}></input>
                     </p>
 
-                    <p className = "mt-2 ml-10">
+                    <p className = "my-6 mx-12">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Resident ID #:
                         </label>
@@ -383,10 +385,23 @@ function UserRegister(){
                         onChange = {handleChange}
                         required></input>
                     </p>
+
+                    <p className = "my-6 mx-12">
+                        <label className = "block text-gray-700 text-sm font-bold mb-2">
+                            Relationship to the Household Head:
+                        </label>
+                        <input className = "shadow appearance-none border rounded py-2 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        id="relationship" 
+                        name = "relationship"
+                        type="text"
+                        value = {registerData.relationship}
+                        onChange = {handleChange}
+                        required></input>
+                    </p>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-20 mr-4 flex">
-                    <p className = "mt-2 ml-3 mr-10">
+                <div className = "my-24 mx-24 flex border-spacing-3 border border-gray-400 items-center justify-center border-spacing-y-3">
+                    <p className = "my-6 mx-12">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Address Line 1:
                         </label>
@@ -399,7 +414,7 @@ function UserRegister(){
                         required></input>
                     </p>
 
-                    <p className = "mt-2 ml-10">
+                    <p className = "my-6 mx-12">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Address Line 2 (optional):
                         </label>
@@ -412,8 +427,8 @@ function UserRegister(){
                     </p>
                 </div>
 
-                <div className = "mt-10 mb-6 ml-20 mr-2 flex">
-                    <p className = "mt-2 ml-3 mr-10">
+                <div className = "my-24 mx-24 border-spacing-3 border border-gray-400 border-spacing-y-3 flex justify-center">
+                    <p className = "my-6 mx-2">
                         <label className = "block text-gray-700 text-sm font-bold mb-2">
                             Password:
                         </label>
@@ -425,9 +440,14 @@ function UserRegister(){
                         value = {registerData.password}
                         onChange = {handleChange}
                         required></input>
-                        <span className = "mt-5 pl-4">Password contains at least: One Uppercase, One Lowercase, One Number, 8 Characters
-                        </span>
                     </p>
+                    <div className = "my-6 mx-12">
+                        <p className = "font-bold text-lg my-2">Password must contain: </p>
+                        <p className = "ml-24">-- One Uppercase</p>
+                        <p className = "ml-24">-- One Lowercase</p>
+                        <p className = "ml-24">-- One Number</p>
+                        <p className = "ml-24">-- Eight Characters</p>
+                    </div>
                 </div>
 
                 <div className = "mt-10 mb-6 ml-20 mr-4 flex">
