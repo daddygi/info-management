@@ -102,7 +102,7 @@ function UserRegister(){
         <div>
             <form onSubmit = {handleSubmit}>
                 <div className = "mt-4 flex">
-                    <button className = "ml-4 font-sans"><Link href = "/">Back</Link></button>
+                    <button className = "ml-4 font-sans"><Link href = "/user-home">Back</Link></button>
                     <img className = "mb-2 ml-auto" src = "/images/tempB.png" width = {100} height = {100}></img>
                 </div>
                 <div className = "my-24 mx-24 flex border-spacing-3 border border-gray-400 items-center border-spacing-y-3">
@@ -460,7 +460,7 @@ function UserRegister(){
                 </div>
             </form>
             {showSuccessModal && (
-                <SuccessModal message1 = "Thank you for Registering!" message2 = "You may now access your account"/>
+                <SuccessModal message1 = "Thank you for Registering!" message2 = "You are now registered"/>
             )}
         </div>
     );

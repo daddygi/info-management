@@ -4,13 +4,6 @@ import ForgotPassword from '../components/ForgotPassword';
 
 export default function Login() {
 
-  const [showModal, setShowModal] = useState(false);
-
-  const handleForgotPasswordButton = () => {
-    setShowModal(true);
-  };
-
-
   return (
     <main className=" flex flex-col items-center justify-center w-full flex-1 px-20 pt-40 text-center ">
       {/* Sign in */}
@@ -21,7 +14,7 @@ export default function Login() {
           </div>
           <div className="mt-10">
             <h2 className="text-3xl font-bold text-blue-500">
-              Sign in to Account
+              Sign in as Admin
             </h2>
             <div className="border-2 w-10 border-blue-500 inline-block mb-2" />
           </div>
@@ -43,20 +36,20 @@ export default function Login() {
               />
             </div>
             <div className="flex justify-between w-64 mb-5 mt-3">
-              <button className="text-xs" onClick = {handleForgotPasswordButton}>
+              {/* <button className="text-xs" onClick = {handleForgotPasswordButton}>
                 Forgot Password?
-              </button>
+              </button> */}
             </div>
             <a
               href="#"
               className="border-2 border-blue-500 text-blue-500 rounded-full px-12 py-2 inline-block font semibold hover:bg-blue-500 hover:text-white"
             >
-              Sign in
+              Sign in as Admin
             </a>
           </div>
         </div>
         <div className="w-2/5 bg-blue-500 text-white rounded-tr-2xl rounded-br-2xl py-36 px-20 ">
-          <h2 className="text-3xl font-bold mb-2">Register</h2>
+          <h2 className="text-3xl font-bold mb-2">For Residents</h2>
           <div className="border-2 w-10 border-white inline-block mb-2"></div>
           <p className="mb-10">Fill up your personal information here.</p>
           <a
@@ -67,11 +60,7 @@ export default function Login() {
           </a>
         </div>
       </div>
-      {showModal && (
-        <ForgotPassword header = "Password Reset Assistance" header2 = "Forgot Your Password?"
-        message = "We're sorry, but we're unable to reset your password online. For assistance, please contact your barangay or visit them in person. They will be able to assist you with your account."
-        />
-      )}
+
     </main>
   );
 }

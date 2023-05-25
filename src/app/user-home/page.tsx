@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import Header from "../components/Header";
 import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/navigation';
 import NavBarUser from "../components/NavBarUser";
+import Link from "next/link";
 
 
 const UserHome: NextPage = () => {
@@ -12,16 +12,20 @@ const UserHome: NextPage = () => {
 
   return (
     <main>
-      <nav> <Header /> <NavBarUser /> </nav>
+      <nav> <NavBarUser /> </nav>
 
       <div className = "bg-cover bg-center mt-2" style={{ backgroundImage: `url('/images/brgy-1.png')`, backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
         <div className = "flex items-start">
           <div className = "flex flex-col">
-            <div className="text-black text-4xl font-bold ml-56 mt-36">Barangay 391 Zone 40 III, Manila</div>
+            <div className="text-black text-4xl font-bold ml-56 mt-36">Registration:</div>
       
-            <div className="text-black text-lg font-bold ml-64  ">
-              <p>Located at 1064 Bilibid Viejo St., Corner R. Hidalgo, Quiapo, Manila</p>
-              <p>82877790</p>
+            <div className="text-black text-2xl font-bold ml-64">
+              <p className = "my-4">Fill your personal information here</p>
+              <p>
+                <Link href ="/userregister">
+                  <button className = "border-2 border-white rounded-full px-12 py-2 inline-block font semibold hover:bg-white hover:text-black">Register</button>
+                </Link>
+              </p>
             </div>
         
             <div className="text-black text-4xl font-bold flex ml-56 mt-36">Introduction</div>
